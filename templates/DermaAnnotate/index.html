@@ -1,0 +1,90 @@
+<html>
+	{%load static%}
+	<head>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+		<title>Annotate</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-light bg-success">
+			<a class="navbar-brand" href="#">
+				<h4 class="text-light">Hi,{{request.user}}</h4 class="text-light">
+			</a>
+
+			<a class="btn btn-danger" href="{% url 'annotate:logout' %}">Log Out</a>
+		</nav>
+
+		<div class="container" id="form-container">
+			<div class="row m-2">
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-header bg-dark">
+							<h5 class="card-title text-light">
+								{{label_count}} of {{image_count}}
+							</h5>
+						</div>
+
+						<img src="{{data.image_path}}" class="card-img-top" />
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<form method="post" action="">
+						{% csrf_token %}
+						<div class="card">
+							<div class="card-header">
+								<h6 class="card-title">What is DX of this image?</h6>
+							</div>
+							<div class="card-body">
+								<div class="form-check">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="annotation"
+										id="atopic"
+										value="0"
+									/>
+									<label class="form-check-label" for="atopic"
+										>Atopic Dermatitis</label
+									>
+								</div>
+								<div class="form-check">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="annotation"
+										id="papular"
+										value="1"
+									/>
+									<label class="form-check-label" for="papular"
+										>Papular Urticaria</label
+									>
+								</div>
+								<div class="form-check">
+									<input
+										class="form-check-input"
+										type="radio"
+										name="annotation"
+										id="scabies"
+										value="2"
+									/>
+									<label class="form-check-label" for="scabies">Scabies</label>
+
+									<button
+										type="submit"
+										class="btn btn-primary mt-2 form-control"
+									>
+										Submit
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
